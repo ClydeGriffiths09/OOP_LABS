@@ -1,7 +1,8 @@
 #include "rectangle.h"
 #include "trapezoid.h"
 #include "rhombus.h"
-#include <sstream>
+
+#include <iostream>
 
 int main() {
     using namespace figure;
