@@ -86,6 +86,12 @@ private:
     std::shared_ptr<T[]> array_;
     size_t size_ = 0;
     size_t capacity_ = 0;
+
+    inline static void Deleter(T* ptr) {
+        if (ptr) {
+            delete[] ptr;
+        }
+    }
 };
 
 template <typename T>
