@@ -8,19 +8,17 @@
 namespace vector {
 
 template <typename T>
-Vector<T>::Vector() noexcept = default;
+Vector<T>::Vector() : size_(0), capacity_(0), array_(nullptr, Deleter) {}
 
 template <typename T>
-Vector<T>::Vector(size_t count, const T& value) : array_(std::make_shared<T[]>(count)), size_(count), capacity_(count) {
+Vector<T>::Vector(size_t count, const T& value) : size_(count), capacity_(count), array_(new T[capacity_], Deleter) {
     for (size_t i = 0; i != size_; ++i) {
         array_[i] = value;
     }
 }
 
 template <typename T>
-Vector<T>::Vector(std::initializer_list<T> init) : size_(init.size()), capacity_(init.size()) {
-    array_ = std::shared_ptr<T[]>(new T[init.size()]);
-
+Vector<T>::Vector(std::initializer_list<T> init) : size_(init.size()), capacity_(init.size()), array_(new T[init.size()], Deleter) {
     size_t i = 0;
     for (const T &fig : init) {
     array_[i] = fig;
@@ -29,7 +27,7 @@ Vector<T>::Vector(std::initializer_list<T> init) : size_(init.size()), capacity_
 }
 
 template<class T>
-Vector<T>::Vector(const Vector& other) : size_(other.size_), capacity_(other.capacity_), array_(std::make_shared<T[]>(capacity_)) {
+Vector<T>::Vector(const Vector& other) : size_(other.size_), capacity_(other.capacity_), array_(new T[capacity_], Deleter) {
     std::copy(other.array_.get(), other.array_.get() + size_, array_.get());
 }
 
@@ -123,7 +121,7 @@ void Vector<T>::Reserve(size_t new_capacity) {
 
 template <typename T>
 void Vector<T>::Reallocate(size_t new_capacity) {
-    std::shared_ptr<T[]> new_data = std::shared_ptr<T[]>(new T[new_capacity], std::default_delete<T[]>());
+    std::shared_ptr<T[]> new_data(new T[new_capacity], Deleter);
     
     for (size_t i = 0; i < size_; ++i) {
         new_data[i] = std::move(array_[i]);

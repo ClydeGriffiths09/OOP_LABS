@@ -18,7 +18,7 @@ const size_t DEFAULT_CAPACITY = 10;
 template <typename T> 
 class Vector {
 public:
-    Vector() noexcept;
+    Vector();
     
     Vector(std::initializer_list<T> init);
     
