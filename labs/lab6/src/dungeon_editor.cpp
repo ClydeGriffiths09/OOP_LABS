@@ -78,7 +78,7 @@ void DungeonEditor::Run() {
                     break;
                 }
 
-                BattleVisitor visitor(range);
+                BattleSystem visitor(range);
                 visitor.AddObserver(std::make_shared<ConsoleObserver>());
                 visitor.AddObserver(std::make_shared<FileObserver>());
 

@@ -9,12 +9,8 @@ include_directories(include)
 add_executable(main_prog
     main.cpp
     src/npc.cpp
-    src/console_observer.cpp
     src/battle_visitor.cpp
-    src/knight.cpp
-    src/pegasus.cpp
-    src/squirrel.cpp
-    src/file_observer.cpp
+    src/observer.cpp
     src/npc_factory.cpp
     src/npc_handle.cpp
     src/dungeon_editor.cpp

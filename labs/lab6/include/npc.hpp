@@ -25,3 +25,24 @@ public:
     virtual bool Fight(std::shared_ptr<NPC> other) = 0;
     virtual void Print() const;
 };
+
+class Knight: public NPC {
+public:
+    Knight(double x, double y, const std::string& name);
+    void Accept(BattleVisitor& visitor, std::shared_ptr<NPC> other) override;
+    bool Fight(std::shared_ptr<NPC> other) override;
+};
+
+class Pegasus: public NPC {
+public:
+    Pegasus(double x, double y, const std::string& name);
+    void Accept(BattleVisitor& visitor, std::shared_ptr<NPC> other) override;
+    bool Fight(std::shared_ptr<NPC> other) override;
+};
+
+class Squirrel: public NPC {
+public:
+    Squirrel(double x, double y, const std::string& name);
+    void Accept(BattleVisitor& visitor, std::shared_ptr<NPC> other) override;
+    bool Fight(std::shared_ptr<NPC> other) override;
+};

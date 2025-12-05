@@ -2,9 +2,7 @@
 #include <stdexcept>
 
 #include "npc_factory.hpp"
-#include "knight.hpp"
-#include "squirrel.hpp"
-#include "pegasus.hpp"
+#include "npc.hpp"
 
 std::shared_ptr<NPC> NPCFactory::CreateNPC(const std::string& type, double x, double y, const std::string& name) {
     if (x < 0 || x > 500 || y < 0 || y > 500) {

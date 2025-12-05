@@ -1,7 +1,8 @@
 #include <stdexcept> 
 
-#include "file_observer.hpp"
+#include "observer.hpp"
 
+// class FileObserver
 FileObserver::FileObserver(const std::string& filename): file(filename, std::ios::app) {
     if (!file.is_open()) {
         throw std::runtime_error("Cannot open log file: " + filename);
@@ -17,4 +18,9 @@ FileObserver::~FileObserver() {
     if (file.is_open()) {
         file.close();
     }
+}
+
+// class ConsoleObserver
+void ConsoleObserver::Notify(const std::string& message) {
+    std::cout << "[CONSOLE] " << message << std::endl;
 }

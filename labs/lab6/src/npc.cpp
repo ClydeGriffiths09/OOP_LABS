@@ -1,7 +1,9 @@
 #include <iostream>
 
 #include "npc.hpp"
+#include "battle_visitor.hpp"
 
+// class NPC
 NPC::NPC(double x, double y, const std::string& name, const std::string& type) 
     : x(x), y(y), name(name), type(type) {}
 
@@ -23,5 +25,41 @@ const std::string& NPC::GetType() const {
 
 void NPC::Print() const {
     std::cout << type << " [" << name << "] at (" << x << ", " << y << ")" << std::endl;
+}
+
+// class Knight
+Knight::Knight(double x, double y, const std::string& name)
+    : NPC(x, y, name, "Knight") {}
+
+void Knight::Accept(BattleVisitor& visitor, std::shared_ptr<NPC> other) {
+    visitor.Visit(*this, other);
+}
+
+bool Knight::Fight(std::shared_ptr<NPC> other) {
+    return dynamic_cast<Squirrel*>(other.get()) != nullptr;
+}
+
+// class Squirrel 
+Squirrel::Squirrel(double x, double y, const std::string& name)
+    : NPC(x, y, name, "Squirrel") {}
+
+void Squirrel::Accept(BattleVisitor& visitor, std::shared_ptr<NPC> other) {
+    visitor.Visit(*this, other);
+}
+
+bool Squirrel::Fight(std::shared_ptr<NPC> other) {
+    return dynamic_cast<Pegasus*>(other.get()) != nullptr;
+}
+
+// class Pegasus
+Pegasus::Pegasus(double x, double y, const std::string& name)
+    : NPC(x, y, name, "Pegasus") {}
+
+void Pegasus::Accept(BattleVisitor& visitor, std::shared_ptr<NPC> other) {
+    visitor.Visit(*this, other);
+}
+
+bool Pegasus::Fight(std::shared_ptr<NPC> other) {
+    return false;
 }
 

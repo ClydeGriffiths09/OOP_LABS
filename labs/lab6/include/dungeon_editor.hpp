@@ -2,8 +2,7 @@
 
 #include "npc_handle.hpp"
 #include "battle_visitor.hpp"
-#include "console_observer.hpp"
-#include "file_observer.hpp"
+#include "observer.hpp"
 
 class DungeonEditor {
 private:
