@@ -10,6 +10,7 @@ private:
     std::unique_ptr<Point<T>[]> points;
 
     bool Validate(Point<T> p1, Point<T> p2, Point<T> p3, Point<T> p4) const;
+    
 public:
     Rectangle();
     Rectangle(Point<T> p1, Point<T> p2, Point<T> p3, Point<T> p4);
